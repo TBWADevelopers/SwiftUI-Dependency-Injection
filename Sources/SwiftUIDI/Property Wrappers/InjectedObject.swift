@@ -1,26 +1,27 @@
 //
-//  StateInjected.swift
+//  InjectedObject.swift
 //  
 //
-//  Created by Tom van der Spek on 05/03/2021.
+//  Created by Vadym on 14.07.2021.
 //
 
+import Foundation
 import SwiftUI
 
 @propertyWrapper
-public class StateInjected<Value>: ObservableObject {
+public struct InjectedObject<Value>: DynamicProperty where Value : ObservableObject {
+
     private let keyPath: KeyPath<DependencyLabel, Value.Type>?
-    
-    @Published public var wrappedValue: Value
+
+    @ObservedObject public var wrappedValue: Value
     
     public init(_ keyPath: KeyPath<DependencyLabel, Value.Type>? = nil) {
         self.keyPath = keyPath
         let dependencies = Environment(\.dependencies).wrappedValue
         
-        guard let service: Value = dependencies.resolve(for: keyPath) else {
+        guard let value: Value = dependencies.resolve(for: keyPath) else {
             fatalError("Service \(Value.self) not registered! See logs for more information")
         }
-        
-        _wrappedValue = Published(initialValue: service)
+        wrappedValue = value
     }
 }

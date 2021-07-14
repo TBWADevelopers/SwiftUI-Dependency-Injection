@@ -91,10 +91,15 @@ After you have registered your dependencies, you can get them form anywhere you 
 @Injected var userDefaults: UserDefaults
 ```
 
-Or use @StateInjected when used in a SwiftUI View
+Or use @InjectedState when used in a SwiftUI View for value types
 
 ```swift
-@StateInjected var userDefaults: UserDefaults
+@InjectedState var valueType: ValueType
+```
+Or use @InjectedObject when used in a SwiftUI View for reference types
+
+```swift
+@InjectedObject var referenceType: ReferenceType
 ```
 
 And for labeled dependencies:

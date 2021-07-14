@@ -17,7 +17,7 @@ final class StateInjectedTests: XCTestCase {
         DependencyKey.defaultValue.register(expectedResult)
         
         // When
-        let result: String = StateInjected().wrappedValue
+        let result: String = InjectedState().wrappedValue
         
         // Then
         XCTAssertEqual(result, expectedResult, "Resolve returned incorrect object")
@@ -29,7 +29,7 @@ final class StateInjectedTests: XCTestCase {
         
         // When
         DependencyKey.defaultValue.register(expectedResult, at: \.helloWorld)
-        let result: String = StateInjected().wrappedValue
+        let result: String = InjectedState().wrappedValue
         
         // Then
         XCTAssertEqual(result, expectedResult, "Resolve returned incorrect object")
