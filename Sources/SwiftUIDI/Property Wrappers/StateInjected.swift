@@ -8,12 +8,12 @@
 import SwiftUI
 
 @propertyWrapper
-struct StateInjected<Value> {
+public struct StateInjected<Value> {
     private let keyPath: KeyPath<DependencyLabel, Value.Type>?
     
-    @State var wrappedValue: Value
+    @State public var wrappedValue: Value
     
-    init(_ keyPath: KeyPath<DependencyLabel, Value.Type>? = nil) {
+    public init(_ keyPath: KeyPath<DependencyLabel, Value.Type>? = nil) {
         self.keyPath = keyPath
         let dependencies = Environment(\.dependencies).wrappedValue
         
