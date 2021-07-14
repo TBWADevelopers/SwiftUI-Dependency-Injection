@@ -8,10 +8,10 @@
 import SwiftUI
 
 @propertyWrapper
-public struct StateInjected<Value> {
+public class StateInjected<Value>: ObservableObject {
     private let keyPath: KeyPath<DependencyLabel, Value.Type>?
     
-    @State public var wrappedValue: Value
+    @Published public var wrappedValue: Value
     
     public init(_ keyPath: KeyPath<DependencyLabel, Value.Type>? = nil) {
         self.keyPath = keyPath
@@ -21,6 +21,6 @@ public struct StateInjected<Value> {
             fatalError("Service \(Value.self) not registered! See logs for more information")
         }
         
-        _wrappedValue = State(initialValue: service)
+        _wrappedValue = Published(initialValue: service)
     }
 }
